@@ -24,8 +24,8 @@ in `.claude/memory/MEMORY.md` (gitignored); this file is public.
 ## Conventions (do not drift)
 - **Dependency versions are locked in three places that must agree:** `pyproject.toml`
   (== pins, uv.lock), the PEP 723 block in the notebook's first code cell (for
-  `uvx juv run`), and the `%pip install` line in that same cell (for Colab). Any dep change
-  updates all three plus `uv.lock`.
+  `uvx juv run`), and the `uv pip install --system` line in that same cell (for Colab).
+  Any dep change updates all three plus `uv.lock`.
 - Runs three ways: `uv sync` + jupyter lab (dev group has jupyterlab), `uvx juv run
   <notebook>`, or Colab via the badge (URL assumes GitHub `kentstephen/bias-bounty-map-tutorial`,
   branch `main`).
