@@ -1,0 +1,24 @@
+[project]
+name = "bias-bounty-map-tutorials"
+version = "0.1.0"
+description = "Tutorial notebooks for the Bias Bounties @ Scale map-data extracts (Overture Maps on Source Cooperative)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "arro3-core==0.8.1",
+    "duckdb==1.5.4",
+    "geoarrow-rust-io==0.6.1",
+    "geopandas==1.1.4",
+    "ipywidgets==8.1.8",
+    "lonboard==0.16.0",
+    "matplotlib==3.11.0",
+    "numpy==2.5.1",
+    "obstore==0.11.0",
+    "pandas==3.0.3",
+    "pyarrow==24.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "jupyterlab==4.6.1",
+]
