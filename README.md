@@ -8,7 +8,7 @@ Everything reads straight off the public bucket. No downloads, no credentials.
 ## The notebook
 
 [`bias-bounty-explore-tutorial.ipynb`](bias-bounty-explore-tutorial.ipynb)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/kentstephen/bias-bounty-map-tutorials/blob/main/bias-bounty-explore-tutorial.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/kentstephen/bias-bounty-map-tutorial/blob/main/bias-bounty-explore-tutorial.ipynb)
 
 1. Opening the files (DuckDB and GeoPandas, one line each)
 2. Overture's nested columns (`names`, `categories`, `sources`)

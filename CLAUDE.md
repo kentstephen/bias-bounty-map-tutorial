@@ -27,7 +27,7 @@ in `.claude/memory/MEMORY.md` (gitignored); this file is public.
   `uvx juv run`), and the `%pip install` line in that same cell (for Colab). Any dep change
   updates all three plus `uv.lock`.
 - Runs three ways: `uv sync` + jupyter lab (dev group has jupyterlab), `uvx juv run
-  <notebook>`, or Colab via the badge (URL assumes GitHub `kentstephen/bias-bounty-map-tutorials`,
+  <notebook>`, or Colab via the badge (URL assumes GitHub `kentstephen/bias-bounty-map-tutorial`,
   branch `main`).
 - Python >= 3.12. Notebook must stay runnable top-to-bottom on a fresh kernel with no
   credentials configured (and also WITH AWS creds configured: anonymous S3 everywhere).

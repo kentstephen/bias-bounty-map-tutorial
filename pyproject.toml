@@ -1,5 +1,5 @@
 [project]
-name = "bias-bounty-map-tutorials"
+name = "bias-bounty-map-tutorial"
 version = "0.1.0"
 description = "Tutorial notebooks for the Bias Bounties @ Scale map-data extracts (Overture Maps on Source Cooperative)"
 readme = "README.md"

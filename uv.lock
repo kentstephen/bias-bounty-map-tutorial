@@ -305,7 +305,7 @@ wheels = [
 ]
 
 [[package]]
-name = "bias-bounty-map-tutorials"
+name = "bias-bounty-map-tutorial"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
