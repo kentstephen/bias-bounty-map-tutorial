@@ -16,7 +16,14 @@ in `.claude/memory/MEMORY.md` (gitignored); this file is public.
 ## Data
 - Product: `source.coop/humane-intelligence/bias-bounty-mapping-equity-challenge`
 - Bucket: `s3://us-west-2.opendata.source.coop/humane-intelligence/bias-bounty-mapping-equity-challenge/`
-- Layout: `geoparquet/<region>/<region>-<source>-<layer>.parquet` + `boundaries/all-aois.geojson`
+- Layout: `reference/<region>/<region>-<source>-<layer>.parquet` + `boundaries/all-aois.geojson`
+  - The bucket previously served these under `geoparquet/`; `reference/` is the same 13 layers
+    and is what the notebook reads now. `geoparquet/` still exists but is being dropped, do not
+    use it.
+  - TODO: a new `strata/` prefix (same `<region>/` layout) ships additional datasets:
+    `cdc-svi`, `census-aiannh`, `census-tracts`, `census-tribal-subdivisions`,
+    `census-tribal-tracts`, `nchs-urban-rural`, `usda-ruca`, `usda-rucc`. Not wired into the
+    notebook yet; add them going forward.
 - Regions: `maricopa-az`, `northern-ca`, `eastern-ok`, `south-central-tx`
 - Overture release pinned `2026-06-17.0`. The data-side README in the private repo is the
   authoritative access reference (s3:// vs https, anonymous S3, DuckDB settings).
