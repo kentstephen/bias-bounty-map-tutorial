@@ -20,10 +20,20 @@ in `.claude/memory/MEMORY.md` (gitignored); this file is public.
   - The bucket previously served these under `geoparquet/`; `reference/` is the same 13 layers
     and is what the notebook reads now. `geoparquet/` still exists but is being dropped, do not
     use it.
-  - TODO: a new `strata/` prefix (same `<region>/` layout) ships additional datasets:
-    `cdc-svi`, `census-aiannh`, `census-tracts`, `census-tribal-subdivisions`,
-    `census-tribal-tracts`, `nchs-urban-rural`, `usda-ruca`, `usda-rucc`. Not wired into the
-    notebook yet; add them going forward.
+  - `strata/<region>/` ships 24 more parquet files per region, but only **five have a geometry
+    column**: `census-tracts`, `census-aiannh`, `census-tribal-tracts`,
+    `census-tribal-subdivisions` (maricopa-az and eastern-ok only), and `noaa-ghcn-stations`.
+    The other 19 are `*-tract-table` files: no geometry, one row per tract, GEOID-keyed, 8 to
+    226 columns, each with a `.csv` twin. `strata-tract-table` (226 cols) is a curated
+    cross-source summary, not a superset: the union of the 18 source tables is 868 columns.
+  - The notebook takes the four boundary polygons and nothing else. Decisions (Stephen's, 2026-07-28):
+    no `strata/national/` (it is `national-census-tracts.parquet` at 224 MB and breaks the AOI
+    framing), no tract tables (no geometry, so nothing to map), no `noaa-ghcn-stations` (a point
+    layer, not a boundary). If the tract tables are ever wanted they join to `census-tracts` on
+    GEOID and want a table+column picker, not a layer toggle.
+  - The old TODO here named `cdc-svi`, `nchs-urban-rural`, `usda-ruca`, `usda-rucc`. Those are
+    really `svi-tract-table`, `nchs-tract-table`, `ruca-tract-table`, `rucc-tract-table`, all
+    non-geometry, all out of scope per the above.
 - Regions: `maricopa-az`, `northern-ca`, `eastern-ok`, `south-central-tx`
 - Overture release pinned `2026-06-17.0`. The data-side README in the private repo is the
   authoritative access reference (s3:// vs https, anonymous S3, DuckDB settings).
@@ -38,5 +48,20 @@ in `.claude/memory/MEMORY.md` (gitignored); this file is public.
   branch `main`).
 - Python >= 3.12. Notebook must stay runnable top-to-bottom on a fresh kernel with no
   credentials configured (and also WITH AWS creds configured: anonymous S3 everywhere).
-- Viz is colorblind-safe only (no red-vs-green encodings).
+- Viz is colorblind-safe only (no red-vs-green encodings). Saturation in `LAYERS` carries the
+  read strategy: sparse whole-file layers are saturated Okabe-Ito, the five viewport reads are
+  pale (they blanket the screen). The two choropleths use different ramps (cividis, viridis) so
+  both can be on at once and still be told apart.
+- **Map panel rules that are load-bearing, do not undo them:**
+  - `MAX_LAYERS` caps only the layers flagged `big` in `LAYERS` (the five viewport reads that
+    box up below `MINZOOM`). Everything read whole, boundaries included, is unlimited.
+  - `rebuild()` must `close()` the Map it replaces. Each lonboard `Map` is an anywidget model
+    with its own WASM instance; leaking them kills the map with "Cannot allocate Wasm memory
+    for new instance".
+  - Only build a new `Map` when one is genuinely needed (newly ticked layer, region change,
+    reload button). Untick, reorder and boundary toggles `restack()` the live map.
+  - `layer_stack()` runs on every camera move, so it hands back cached layer instances and never
+    rebuilds them. Reusing instances is also the lonboard #1044 fill-drop workaround.
+  - No threads and no timers anywhere. Colab only reliably delivers widget updates from
+    browser-event comm handlers; a time-based debounce would reintroduce the old Colab bug.
 - This repo is public: no contract, billing, or coordination details in committed files.
