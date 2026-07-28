@@ -64,4 +64,11 @@ in `.claude/memory/MEMORY.md` (gitignored); this file is public.
     rebuilds them. Reusing instances is also the lonboard #1044 fill-drop workaround.
   - No threads and no timers anywhere. Colab only reliably delivers widget updates from
     browser-event comm handlers; a time-based debounce would reintroduce the old Colab bug.
+  - A layer that was showing row-group boxes must never be reused as if it held features, or it
+    stays boxed forever past `MINZOOM`. Reuse requires the layer to have been in the previous
+    *read* set.
+  - `on_region` holds `state["busy"]` and disables the search while a region loads, clearing both
+    in a `finally`. Two camera destinations at once means two `Map` rebuilds, and that burst is
+    what turns the notebook output grey. Both halves matter: the flag catches an event already in
+    flight, the disabled widget is the affordance.
 - This repo is public: no contract, billing, or coordination details in committed files.
