@@ -35,7 +35,7 @@ in `.claude/memory/MEMORY.md` (gitignored); this file is public.
     really `svi-tract-table`, `nchs-tract-table`, `ruca-tract-table`, `rucc-tract-table`, all
     non-geometry, all out of scope per the above.
 - Regions: `maricopa-az`, `northern-ca`, `eastern-ok`, `south-central-tx`
-- Overture release pinned `2026-06-17.0`. The data-side README in the private repo is the
+- Overture release pinned `2026-08-19.0` (first issue was `2026-06-17.0`; Overture deletes releases after 60 days, so the whole product was re-cut on `2026-08-19.0` on 2026-08-26). The data-side README in the private repo is the
   authoritative access reference (s3:// vs https, anonymous S3, DuckDB settings).
 
 ## Conventions (do not drift)
