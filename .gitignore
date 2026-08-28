@@ -4,3 +4,4 @@ __pycache__/
 .claude/memory/
 .DS_Store
 .env
+CLAUDE.md
