@@ -19,8 +19,9 @@ and everything here reads straight off that public bucket. No downloads, no cred
    structs. Dot access and `unnest` in DuckDB, `.str` and `explode` in GeoPandas, typed
    accessors with the pyarrow backend.
 3. **An interactive map.** Pick a region, tick layers, and they read off the bucket for the
-   current viewport (lonboard). All 13 `reference/` layers are there, plus the tract, tribal
-   area and tribal tract outlines from `strata/`, two choropleths, and a place search. Draw a
+   current viewport (lonboard). The five Overture layers and ACS housing (as a choropleth) are
+   there, plus the tract, tribal area and tribal tract outlines from `strata/`, and a place
+   search. Draw a
    box on the map and the panel hands back a complete DuckDB + lonboard snippet that reads
    exactly those features.
 
